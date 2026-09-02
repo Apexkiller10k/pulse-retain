@@ -1,0 +1,42 @@
+/* PulseRetain — Global styles */
+
+/* ── Base ─────────────────────────────────────────────────────────────── */
+[data-testid="stAppViewContainer"] {
+    background-color: #0f1117;
+    color: #e8eaf0;
+}
+[data-testid="stSidebar"] {
+    background-color: #161b27;
+    border-right: 1px solid #1e2535;
+}
+[data-testid="stSidebar"] * {
+    color: #c8cdd8 !important;
+}
+
+/* ── Typography ───────────────────────────────────────────────────────── */
+h1, h2, h3 { color: #e8eaf0; font-weight: 600; }
+p, li       { color: #9aa0b0; }
+
+/* ── KPI cards ────────────────────────────────────────────────────────── */
+.kpi-card {
+    background: #161b27;
+    border: 1px solid #1e2535;
+    border-radius: 10px;
+    padding: 20px 24px;
+    text-align: center;
+}
+.kpi-value { font-size: 2.2rem; font-weight: 700; color: #4f8ef7; }
+.kpi-label { font-size: 0.82rem; color: #6b7280; text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+
+/* ── Risk badges ──────────────────────────────────────────────────────── */
+.badge { display:inline-block; padding:3px 10px; border-radius:12px; font-size:.78rem; font-weight:600; }
+.badge-low      { background:#0d3321; color:#34d399; }
+.badge-moderate { background:#2d2a0a; color:#fbbf24; }
+.badge-high     { background:#2d1a0a; color:#f97316; }
+.badge-critical { background:#2d0a0a; color:#f87171; }
+
+/* ── Section divider ──────────────────────────────────────────────────── */
+.section-divider { border: none; border-top: 1px solid #1e2535; margin: 24px 0; }
+
+/* ── Metric delta override ────────────────────────────────────────────── */
+[data-testid="stMetricDelta"] { font-size: .78rem; }

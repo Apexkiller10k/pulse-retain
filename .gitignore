@@ -1,0 +1,25 @@
+# Environment
+.env
+*.env
+
+# Raw employee data — treat as sensitive
+data/raw/
+data/processed/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Models (large binaries)
+models/*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
