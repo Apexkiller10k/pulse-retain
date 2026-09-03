@@ -51,20 +51,19 @@ with st.sidebar:
     )
 
     page_names = list(PAGES.keys())
+    page = st.session_state.get("active_page", "Dashboard")
+    if page not in PAGES:
+        page = "Dashboard"
 
-    if "active_page" in st.session_state:
-        active = st.session_state.pop("active_page")
-        default_idx = page_names.index(active) if active in page_names else 0
-    else:
-        default_idx = 0
-
-    page = st.radio(
-        "Navigation",
-        page_names,
-        index=default_idx,
-        label_visibility="collapsed",
-        key="nav_radio",
-    )
+    for page_name in page_names:
+        if st.button(
+            page_name,
+            key=f"nav_{page_name}",
+            use_container_width=True,
+            type="primary" if page_name == page else "secondary",
+        ):
+            st.session_state["active_page"] = page_name
+            st.rerun()
 
     st.markdown("<hr style='border-color:#1e2535;margin:24px 0 16px'>", unsafe_allow_html=True)
     st.markdown(

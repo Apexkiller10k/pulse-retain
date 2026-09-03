@@ -23,7 +23,7 @@ from src.features.engineering import add_engineered_features
 from src.models.predict import predict, load_model
 
 DARK = "#0f1117"
-SURFACE = "#161b27"
+SURFACE = "#ffffff"
 BORDER = "#1e2535"
 
 
@@ -39,13 +39,13 @@ def render():
     with tab1:
         st.subheader("Risk Score Distribution")
         fig = px.histogram(
-            df, x="risk_score", nbins=30, template="plotly_dark",
+            df, x="risk_score", nbins=30, template="plotly_white",
             color_discrete_sequence=["#4f8ef7"],
             labels={"risk_score": "Risk Score"},
         )
-        fig.update_layout(paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
-                          margin=dict(t=10, b=10))
-        st.plotly_chart(fig, use_container_width=True)
+        fig.update_layout(paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+                  height=340, autosize=True, margin=dict(t=12, r=18, b=48, l=58))
+        st.plotly_chart(fig, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
         col1, col2 = st.columns(2)
 
@@ -53,7 +53,7 @@ def render():
             st.subheader("Tenure vs Risk Score")
             fig2 = px.scatter(
                 df, x="YearsAtCompany", y="risk_score",
-                color="risk_level", template="plotly_dark",
+                color="risk_level", template="plotly_white",
                 color_discrete_map={
                     "LOW": "#34d399", "MODERATE": "#fbbf24",
                     "HIGH": "#f97316", "CRITICAL": "#f87171",
@@ -61,15 +61,15 @@ def render():
                 labels={"YearsAtCompany": "Years at Company", "risk_score": "Risk Score"},
                 opacity=0.6,
             )
-            fig2.update_layout(paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
-                               margin=dict(t=10, b=10))
-            st.plotly_chart(fig2, use_container_width=True)
+            fig2.update_layout(paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+                               height=360, autosize=True, margin=dict(t=12, r=16, b=48, l=58))
+            st.plotly_chart(fig2, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
         with col2:
             st.subheader("Satisfaction Index vs Risk Score")
             fig3 = px.scatter(
                 df, x="SatisfactionIndex", y="risk_score",
-                color="risk_level", template="plotly_dark",
+                color="risk_level", template="plotly_white",
                 color_discrete_map={
                     "LOW": "#34d399", "MODERATE": "#fbbf24",
                     "HIGH": "#f97316", "CRITICAL": "#f87171",
@@ -77,31 +77,32 @@ def render():
                 labels={"SatisfactionIndex": "Satisfaction Index", "risk_score": "Risk Score"},
                 opacity=0.6,
             )
-            fig3.update_layout(paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
-                               margin=dict(t=10, b=10))
-            st.plotly_chart(fig3, use_container_width=True)
+            fig3.update_layout(paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+                               height=360, autosize=True, margin=dict(t=12, r=16, b=48, l=58))
+            st.plotly_chart(fig3, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
         st.subheader("Risk by Marital Status & Overtime")
         col3, col4 = st.columns(2)
         with col3:
             ms = df.groupby("MaritalStatus")["risk_score"].mean().round(1).reset_index()
             fig4 = px.bar(ms, x="MaritalStatus", y="risk_score",
-                          template="plotly_dark", color_discrete_sequence=["#4f8ef7"],
+                          template="plotly_white", color_discrete_sequence=["#4f8ef7"],
                           labels={"risk_score": "Avg Risk Score"})
-            fig4.update_layout(paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
-                               margin=dict(t=10, b=10))
-            st.plotly_chart(fig4, use_container_width=True)
+            fig4.update_layout(paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+                               height=340, autosize=True, margin=dict(t=12, r=16, b=48, l=58))
+            st.plotly_chart(fig4, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
         with col4:
             ot = df.groupby("OverTime")["risk_score"].mean().round(1).reset_index()
             fig5 = px.bar(ot, x="OverTime", y="risk_score",
-                          template="plotly_dark",
+                          template="plotly_white",
                           color="OverTime",
                           color_discrete_map={"Yes": "#f97316", "No": "#34d399"},
                           labels={"risk_score": "Avg Risk Score"})
-            fig5.update_layout(paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
-                               showlegend=False, margin=dict(t=10, b=10))
-            st.plotly_chart(fig5, use_container_width=True)
+            fig5.update_layout(paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+                               showlegend=False, height=340, autosize=True,
+                               margin=dict(t=12, r=16, b=48, l=58))
+            st.plotly_chart(fig5, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
     # ── Tab 2: Model Performance ──────────────────────────────────────────
     with tab2:
@@ -158,11 +159,11 @@ def render():
                 line=dict(color="#6b7280", dash="dash"), name="Random",
             ))
             fig_roc.update_layout(
-                template="plotly_dark", paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
+                template="plotly_white", paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
                 xaxis_title="False Positive Rate", yaxis_title="True Positive Rate",
-                margin=dict(t=10, b=10),
+                height=360, autosize=True, margin=dict(t=18, r=18, b=58, l=64),
             )
-            st.plotly_chart(fig_roc, use_container_width=True)
+            st.plotly_chart(fig_roc, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
         with col_b:
             st.subheader("Precision-Recall Curve")
@@ -172,11 +173,11 @@ def render():
                 line=dict(color="#f97316", width=2),
             ))
             fig_pr.update_layout(
-                template="plotly_dark", paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
+                template="plotly_white", paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
                 xaxis_title="Recall", yaxis_title="Precision",
-                margin=dict(t=10, b=10),
+                height=360, autosize=True, margin=dict(t=18, r=18, b=58, l=64),
             )
-            st.plotly_chart(fig_pr, use_container_width=True)
+            st.plotly_chart(fig_pr, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
         st.subheader("Confusion Matrix")
         fig_cm = px.imshow(
@@ -185,13 +186,13 @@ def render():
             x=["Predicted No", "Predicted Yes"],
             y=["Actual No", "Actual Yes"],
             text_auto=True,
-            color_continuous_scale=["#161b27", "#4f8ef7"],
-            template="plotly_dark",
+            color_continuous_scale=["#d9e5f2", "#1769aa"],
+            template="plotly_white",
         )
         fig_cm.update_layout(
-            paper_bgcolor=SURFACE, margin=dict(t=10, b=10), width=400
+            paper_bgcolor="#ffffff", height=360, autosize=True, margin=dict(t=18, r=24, b=58, l=64)
         )
-        st.plotly_chart(fig_cm)
+        st.plotly_chart(fig_cm, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
         st.subheader("Feature Importance (Top 20)")
         model = load_model()
@@ -210,12 +211,13 @@ def render():
 
         fig_fi = px.bar(
             fi, x="Importance", y="Feature", orientation="h",
-            template="plotly_dark", color="Importance",
+            template="plotly_white", color="Importance",
             color_continuous_scale=["#4f8ef7", "#f97316"],
         )
         fig_fi.update_layout(
-            paper_bgcolor=SURFACE, plot_bgcolor=SURFACE,
-            coloraxis_showscale=False, margin=dict(t=10, b=10),
+            paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+            coloraxis_showscale=False, height=560, autosize=True,
+            margin=dict(t=18, r=18, b=28, l=150),
             yaxis=dict(autorange="reversed"),
         )
-        st.plotly_chart(fig_fi, use_container_width=True)
+        st.plotly_chart(fig_fi, use_container_width=True, config={"responsive": True, "displayModeBar": False})

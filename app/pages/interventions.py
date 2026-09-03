@@ -80,14 +80,14 @@ def render():
             with col_l:
                 st.markdown(
                     f"<span class='badge badge-{level.lower()}'>{level}</span>"
-                    f"&nbsp;&nbsp;<span style='color:#9aa0b0;font-size:.85rem'>"
-                    f"Top driver: <strong style='color:#c8cdd8'>{row['top_driver']}</strong></span>",
+                    f"&nbsp;&nbsp;<span style='color:#667085;font-size:.85rem'>"
+                    f"Top driver: <strong style='color:#172235'>{row['top_driver']}</strong></span>",
                     unsafe_allow_html=True,
                 )
                 st.markdown(
-                    f"<div style='background:#1a2030;border-radius:6px;padding:10px 14px;"
-                    f"margin-top:8px;color:#9aa0b0;font-size:.85rem'>"
-                    f"<strong style='color:#4f8ef7'>Recommended:</strong> {row['recommended_action']}"
+                    f"<div style='background:#eef4fb;border:1px solid #d9e5f2;border-radius:6px;padding:10px 14px;"
+                    f"margin-top:8px;color:#475467;font-size:.85rem'>"
+                    f"<strong style='color:#1769aa'>Recommended:</strong> {row['recommended_action']}"
                     f"</div>",
                     unsafe_allow_html=True,
                 )

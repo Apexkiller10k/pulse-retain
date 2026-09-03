@@ -28,7 +28,7 @@ def render():
     total      = len(df)
     high_risk  = int((df["risk_level"].isin(["HIGH", "CRITICAL"])).sum())
     critical   = int((df["risk_level"] == "CRITICAL").sum())
-    avg_score  = round(df["risk_score"].mean(), 1)
+    avg_score  = f"{float(df['risk_score'].mean()):.1f}"
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
@@ -71,13 +71,14 @@ def render():
             counts, x="Risk Level", y="Count",
             color="Risk Level",
             color_discrete_map=RISK_COLORS,
-            template="plotly_dark",
+            template="plotly_white",
         )
         fig.update_layout(
-            paper_bgcolor="#161b27", plot_bgcolor="#161b27",
-            showlegend=False, margin=dict(t=10, b=10),
+            paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+            showlegend=False, height=340, autosize=True,
+            margin=dict(t=12, r=18, b=48, l=52),
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
     with col_b:
         st.subheader("Avg Risk Score by Department")
@@ -88,15 +89,16 @@ def render():
         )
         fig2 = px.bar(
             dept, x="risk_score", y="Department",
-            orientation="h", template="plotly_dark",
+            orientation="h", template="plotly_white",
             color="risk_score",
             color_continuous_scale=["#34d399", "#fbbf24", "#f97316", "#f87171"],
         )
         fig2.update_layout(
-            paper_bgcolor="#161b27", plot_bgcolor="#161b27",
-            coloraxis_showscale=False, margin=dict(t=10, b=10),
+            paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+            coloraxis_showscale=False, height=340, autosize=True,
+            margin=dict(t=12, r=18, b=28, l=126),
         )
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
     # ── Row 3: Job role risk + Top drivers ────────────────────────────────
     col_c, col_d = st.columns(2)
@@ -110,15 +112,16 @@ def render():
         )
         fig3 = px.bar(
             role, x="risk_score", y="JobRole",
-            orientation="h", template="plotly_dark",
+            orientation="h", template="plotly_white",
             color="risk_score",
             color_continuous_scale=["#34d399", "#fbbf24", "#f97316", "#f87171"],
         )
         fig3.update_layout(
-            paper_bgcolor="#161b27", plot_bgcolor="#161b27",
-            coloraxis_showscale=False, margin=dict(t=10, b=10),
+            paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+            coloraxis_showscale=False, height=440, autosize=True,
+            margin=dict(t=12, r=18, b=28, l=150),
         )
-        st.plotly_chart(fig3, use_container_width=True)
+        st.plotly_chart(fig3, use_container_width=True, config={"responsive": True, "displayModeBar": False})
 
     with col_d:
         st.subheader("Top Risk Drivers Across Organisation")
@@ -129,13 +132,14 @@ def render():
         driver_counts["Pct"] = (driver_counts["Count"] / total * 100).round(1)
         fig4 = px.bar(
             driver_counts, x="Pct", y="Driver",
-            orientation="h", template="plotly_dark",
+            orientation="h", template="plotly_white",
             labels={"Pct": "% of Employees", "Driver": ""},
             color="Pct",
             color_continuous_scale=["#4f8ef7", "#f97316"],
         )
         fig4.update_layout(
-            paper_bgcolor="#161b27", plot_bgcolor="#161b27",
-            coloraxis_showscale=False, margin=dict(t=10, b=10),
+            paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+            coloraxis_showscale=False, height=440, autosize=True,
+            margin=dict(t=12, r=18, b=42, l=150),
         )
-        st.plotly_chart(fig4, use_container_width=True)
+        st.plotly_chart(fig4, use_container_width=True, config={"responsive": True, "displayModeBar": False})

@@ -65,22 +65,22 @@ def render():
             gauge={
                 "axis": {"range": [0, 100], "tickcolor": "#6b7280"},
                 "bar":  {"color": color},
-                "bgcolor": "#161b27",
+                "bgcolor": "#f5f7fa",
                 "steps": [
-                    {"range": [0,  30], "color": "#0d3321"},
-                    {"range": [30, 60], "color": "#2d2a0a"},
-                    {"range": [60, 80], "color": "#2d1a0a"},
-                    {"range": [80,100], "color": "#2d0a0a"},
+                    {"range": [0,  30], "color": "#dff5e9"},
+                    {"range": [30, 60], "color": "#fff1c7"},
+                    {"range": [60, 80], "color": "#ffe5d2"},
+                    {"range": [80,100], "color": "#fbdfe1"},
                 ],
                 "threshold": {"line": {"color": color, "width": 3}, "value": score},
             },
-            title={"text": "Attrition Risk Score", "font": {"color": "#9aa0b0"}},
+            title={"text": "Attrition Risk Score", "font": {"color": "#667085"}},
         ))
         fig.update_layout(
-            paper_bgcolor="#0f1117", font_color="#e8eaf0",
-            height=260, margin=dict(t=30, b=0, l=20, r=20),
+            paper_bgcolor="#ffffff", font_color="#172235",
+            height=300, autosize=True, margin=dict(t=30, b=12, l=20, r=20),
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, use_container_width=True, config={"responsive": True, "displayModeBar": False})
         st.markdown(
             f"<div style='text-align:center'>"
             f"<span class='badge badge-{level.lower()}' style='font-size:1rem;padding:6px 18px'>"
@@ -110,7 +110,7 @@ def render():
                 bar_w = min(int(abs(val) * 400), 100)
                 st.markdown(
                     f"<div style='display:flex;align-items:center;gap:10px;margin-bottom:6px'>"
-                    f"<span style='width:200px;color:#c8cdd8;font-size:.85rem'>{label}</span>"
+                    f"<span style='width:200px;color:#475467;font-size:.85rem'>{label}</span>"
                     f"<div style='background:#f97316;height:10px;width:{bar_w}%;border-radius:4px'></div>"
                     f"<span style='color:#f97316;font-size:.8rem'>{val:+.3f}</span>"
                     f"</div>",
@@ -123,7 +123,7 @@ def render():
                 bar_w = min(int(abs(val) * 400), 100)
                 st.markdown(
                     f"<div style='display:flex;align-items:center;gap:10px;margin-bottom:6px'>"
-                    f"<span style='width:200px;color:#c8cdd8;font-size:.85rem'>{label}</span>"
+                    f"<span style='width:200px;color:#475467;font-size:.85rem'>{label}</span>"
                     f"<div style='background:#34d399;height:10px;width:{bar_w}%;border-radius:4px'></div>"
                     f"<span style='color:#34d399;font-size:.8rem'>{val:+.3f}</span>"
                     f"</div>",
@@ -139,9 +139,9 @@ def render():
     actions = get_all_recommendations(row["top_driver"])
     for i, action in enumerate(actions, 1):
         st.markdown(
-            f"<div style='background:#161b27;border:1px solid #1e2535;border-radius:8px;"
-            f"padding:14px 18px;margin-bottom:10px;color:#c8cdd8;font-size:.9rem'>"
-            f"<strong style='color:#4f8ef7'>{i}.</strong> {action}</div>",
+            f"<div style='background:#eef4fb;border:1px solid #d9e5f2;border-radius:8px;"
+            f"padding:14px 18px;margin-bottom:10px;color:#475467;font-size:.9rem'>"
+            f"<strong style='color:#1769aa'>{i}.</strong> {action}</div>",
             unsafe_allow_html=True,
         )
 
