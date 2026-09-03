@@ -2,8 +2,7 @@
 .env
 *.env
 
-# Raw employee data — treat as sensitive
-data/raw/
+# Processed data — intermediate artefacts
 data/processed/
 
 # Python
@@ -17,9 +16,9 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
-# Models (large binaries)
-models/*.pkl
-
 # OS
 .DS_Store
 Thumbs.db
+
+# Note: data/raw/HR-Employee-Attrition.csv and models/*.pkl
+# are committed intentionally for Streamlit Cloud deployment.
